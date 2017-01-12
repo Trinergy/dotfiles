@@ -1,0 +1,154 @@
+" An example for a vimrc file.
+"
+" Maintainer:	Bram Moolenaar <Bram@vim.org>
+" Last change:	2008 Dec 17
+"
+" To use it, copy it to
+"     for Unix and OS/2:  ~/.vimrc
+"	      for Amiga:  s:.vimrc
+"  for MS-DOS and Win32:  $VIM\_vimrc
+"	    for OpenVMS:  sys$login:.vimrc
+
+" When started as "evim", evim.vim will already have done these settings.
+if v:progname =~? "evim"
+  finish
+endif
+
+
+" Use Vim settings, rather than Vi settings (much better!).
+" This must be first, because it changes other options as a side effect.
+set nocompatible
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+
+if has("vms")
+  set nobackup		" do not keep a backup file, use versions instead
+else
+  set backup		" keep a backup file
+endif
+set history=50		" keep 50 lines of command line history
+set ruler		" show the cursor position all the time
+set showcmd		" display incomplete commands
+set incsearch		" do incremental searching
+
+" For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
+" let &guioptions = substitute(&guioptions, "t", "", "g")
+
+" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
+" so that you can undo CTRL-U after inserting a line break.
+inoremap <C-U> <C-G>u<C-U>
+
+" In many terminal emulators the mouse works just fine, thus enable it.
+if has('mouse')
+  set mouse=a
+endif
+
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+
+  " Enable file type detection.
+  " Use the default filetype settings, so that mail gets 'tw' set to 72,
+  " 'cindent' is on in C files, etc.
+  " Also load indent files, to automatically do language-dependent indenting.
+  filetype plugin indent on
+
+  " Put these in an autocmd group, so that we can delete them easily.
+  augroup vimrcEx
+  au!
+
+  " For all text files set 'textwidth' to 78 characters.
+  autocmd FileType text setlocal textwidth=78
+
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it when the position is invalid or when inside an event handler
+  " (happens when dropping a file on gvim).
+  " Also don't do it when the mark is in the first line, that is the default
+  " position when opening a file.
+  autocmd BufReadPost *
+    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
+
+  augroup END
+
+else
+
+  set autoindent		" always set autoindenting on
+
+endif " has("autocmd")
+
+" Convenient command to see the difference between the current buffer and the
+" file it was loaded from, thus the changes you made.
+" Only define it when not defined already.
+if !exists(":DiffOrig")
+  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+		  \ | wincmd p | diffthis
+endif
+
+" Setup Vim.plug
+call plug#begin()
+Plug 'scrooloose/nerdtree'
+Plug 'kien/ctrlp.vim'
+Plug 'ervandew/supertab'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'Raimondi/delimitMate'
+Plug 'flazz/vim-colorschemes'
+" Plug 'vim-syntastic/syntastic'
+call plug#end()
+
+" Color Settings
+" colorscheme monokai
+syntax on
+" Relative number lines
+set relativenumber
+set number
+" Set highlight search
+set hlsearch
+" CtrlP command
+let g:ctrlp_map = '<C-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+
+" NerdTree autoload on vim cmd
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" Set Airline
+let g:airline#extensions#tabline#enabled = 1
+function! AirlineInit()
+	let g:airline_section_a = airline#section#create(['mode', ' ', 'branch'])
+
+endfunction
+autocmd VimEnter * call AirlineInit()
+
+" Set Airline Theme
+let g:airline_theme='bubblegum'
+set laststatus=2
+" Remap Leader
+:let mapleader = ","
+" Don't use Ex mode, use Q for formatting
+map Q gq
+" Select all
+" map <C-a> <esc>ggVG 
+" Scroll Down
+nnoremap <C-e> 10<C-e>
+" Scroll Up
+nnoremap <C-r> 10<C-y>
+" Redo
+nnoremap <C-y> <C-R>
+" Set Nerdtree Toggle
+map <Leader>, :NERDTreeToggle<CR>
+" Indent to 2 space
+set tabstop=2
+set shiftwidth=2
+" Indent Guide Colors
+nnoremap <Leader>i :set list!<CR>
+set listchars=tab:▸␣,nbsp:☠
+" turn off highlight search
+nnoremap <Leader>h :set nohlsearch!<CR>
+" Regex Search Shortcuts
+nnoremap <Leader>f :lvimgrep /
+nnoremap <Leader>ff :lopen<CR>
