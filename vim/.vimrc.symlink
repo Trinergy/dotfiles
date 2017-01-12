@@ -127,6 +127,11 @@ autocmd VimEnter * call AirlineInit()
 " Set Airline Theme
 let g:airline_theme='bubblegum'
 set laststatus=2
+
+" Backup and swap files
+set backupdir=~/.vim-tmp
+set directory=~/.vim-tmp
+
 " Remap Leader
 :let mapleader = ","
 " Don't use Ex mode, use Q for formatting
@@ -152,3 +157,5 @@ nnoremap <Leader>h :set nohlsearch!<CR>
 " Regex Search Shortcuts
 nnoremap <Leader>f :lvimgrep /
 nnoremap <Leader>ff :lopen<CR>
+" Same clipboard as system
+set clipboard=unnamed
