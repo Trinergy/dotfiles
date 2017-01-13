@@ -34,6 +34,10 @@ call plug#end()
 " Color Settings
 " colorscheme monokai
 syntax on
+set background=dark
+colorscheme solarized
+let g:solarized_termtrans=1
+
 " Relative number lines
 set relativenumber
 set number
