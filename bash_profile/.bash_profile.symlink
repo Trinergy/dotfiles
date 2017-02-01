@@ -3,6 +3,10 @@ export NVM_DIR="/Users/KennyWu/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 export PATH=$PATH:/Applications/Sublime\ Text.app/Contents/SharedSupport/bin
+
+export CLICOLOR=1
+export LSCOLORS=ExFxCxDxBxegedabagacad
+
 alias chrome="open -a 'Google Chrome'"
 alias slack="open -a Slack"
 alias spotify="open -a Spotify"
