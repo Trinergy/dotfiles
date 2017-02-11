@@ -1,7 +1,16 @@
 -- Application Hotkey
 alpha = {"cmd", "ctrl"}
--- Windows Hotkey
-beta = {"cmd", "shift"}
+-- Windows Managment Hotkey
+beta = {"cmd", "ctrl", "alt"}
+-- Miro Window Management
+hyper = beta
+
+require('watcher')
+require('position')
+
+hs.hotkey.bind(alpha, "X", function()
+    hs.application.open("Calendar")
+end)
 
 hs.hotkey.bind(alpha, "N", function()
     hs.application.open("Evernote")
@@ -51,7 +60,3 @@ hs.hotkey.bind(alpha, "P", function()
     hs.application.open("Preview")
 end)
 
--- hs.hotkey.bind(beta, "O", function()
---     local w = hs.window.focusedWindow()
---     w:maximize()
--- end)
