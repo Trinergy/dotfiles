@@ -4,7 +4,8 @@ export NVM_DIR="/Users/KennyWu/.nvm"
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 export PATH=$PATH:/Applications/Sublime\ Text.app/Contents/SharedSupport/bin
 export PS1="\e[1;36m[\u@\h \W]\$ \e[m"
-
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
+export PATH="/usr/local/sbin:$PATH"
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 e() { emacs "$@" & }
