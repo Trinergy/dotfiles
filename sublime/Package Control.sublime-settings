@@ -1,0 +1,28 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"AdvancedNewFile",
+		"All Autocomplete",
+		"Babel",
+		"BracketHighlighter",
+		"Clipboard Manager",
+		"CloseOtherWindows",
+		"DocBlockr",
+		"Emmet",
+		"Git",
+		"GitGutter",
+		"HTML5",
+		"jQuery",
+		"JSHint Gutter",
+		"Package Control",
+		"PackageResourceViewer",
+		"SideBarEnhancements",
+		"Surround",
+		"SyncedSideBar",
+		"Vintage Surround"
+	]
+}

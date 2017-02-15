@@ -1,0 +1,16 @@
+
+{
+ 
+  "bracket_styles": {
+    
+    "default": {
+        "icon": "star",
+        // BH1's original default color for reference
+        // "color": "entity.name.class",
+        "color": "brackethighlighter.kenny",
+        "style": "highlight"
+    }
+    
+  }
+ 
+}
