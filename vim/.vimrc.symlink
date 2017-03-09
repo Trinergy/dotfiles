@@ -19,6 +19,8 @@ endif
 
 " Setup Vim.plug
 call plug#begin()
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 Plug 'scrooloose/nerdtree'
 Plug 'kien/ctrlp.vim'
 Plug 'ervandew/supertab'
@@ -32,14 +34,18 @@ Plug 'tpope/vim-surround'
 " Plug 'vim-syntastic/syntastic'
 call plug#end()
 
+" Use JSX syntax highlighting for .js files too
+let g:jsx_ext_required = 0
+
 " Color Settings
 " colorscheme monokai
 syntax on
 " set background=dark
 
 " Relative number lines
-set relativenumber
-set number
+" set relativenumber
+" set number
+ 
 " Set highlight search
 set hlsearch
 " CtrlP command
@@ -78,7 +84,7 @@ set title
 " Don't use Ex mode, use Q for formatting
 map Q gq
 " Select all
-" map <C-a> <esc>ggVG 
+map <C-a> <esc>ggVG 
 " Scroll Down
 nnoremap <C-e> 10<C-e>
 " Scroll Up
