@@ -19,6 +19,8 @@ endif
 
 " Setup Vim.plug
 call plug#begin()
+Plug 'jeetsukumaran/vim-buffergator'
+Plug 'ggreer/the_silver_searcher'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'scrooloose/nerdtree'
@@ -33,6 +35,18 @@ Plug 'flazz/vim-colorschemes'
 Plug 'tpope/vim-surround'
 " Plug 'vim-syntastic/syntastic'
 call plug#end()
+"
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
 
 " Use JSX syntax highlighting for .js files too
 let g:jsx_ext_required = 0
@@ -44,7 +58,7 @@ syntax on
 
 " Relative number lines
 " set relativenumber
-" set number
+set number
  
 " Set highlight search
 set hlsearch
@@ -54,8 +68,8 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 
 " NerdTree autoload on vim cmd
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " Set Airline
 let g:airline#extensions#tabline#enabled = 1
@@ -73,6 +87,8 @@ set laststatus=2
 set backupdir=~/.vim-tmp
 set directory=~/.vim-tmp
 
+" Set Autoread
+set autoread
 " Ignore Case
 set ignorecase
 
@@ -95,6 +111,7 @@ nnoremap <C-y> <C-R>
 map <Leader>, :NERDTreeToggle<CR>
 " Indent to 2 space
 set tabstop=2
+set expandtab
 set shiftwidth=2
 " Indent Guide Colors
 nnoremap <Leader>i :set list!<CR>
@@ -104,6 +121,14 @@ nnoremap <Leader>h :set nohlsearch!<CR>
 " Regex Search Shortcuts
 nnoremap <Leader>f :lvimgrep /
 nnoremap <Leader>ff :lopen<CR>
+
+" replaced with buffergator
+" Cycle buffers
+" map <Leader>b[ :bprevious<CR>
+" map <Leader>b] :bnext<CR>
+" map <Leader>bs[ :vert sb previous<CR>
+" map <Leader>bs] :vert sb next<CR>
+
 " Same clipboard as system
 set clipboard=unnamed
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
